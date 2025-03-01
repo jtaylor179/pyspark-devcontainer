@@ -15,6 +15,63 @@ This repository contains a development container configuration for Apache Spark 
 3. When prompted, click "Reopen in Container" or run the "Dev Containers: Reopen in Container" command from the Command Palette (Ctrl/Cmd + Shift + P)
 4. Jupyter Notebook will automatically start and be available at http://localhost:8888
 
+## Using as a Template for Your Project
+
+There are several ways to use this devcontainer configuration with your own PySpark project:
+
+### Option 1: Copy Dev Container Files
+Best for existing projects where you want to add the dev container configuration:
+
+1. Copy the following files from this repository to your project:
+   ```
+   .devcontainer/
+   ├── devcontainer.json
+   ├── Dockerfile
+   └── start-jupyter.sh
+   ```
+2. Open your project in VS Code
+3. When prompted, click "Reopen in Container"
+4. Your project files will be mounted at `/workspace` inside the container
+
+### Option 2: Template Repository
+Best for starting new projects:
+
+1. Click the "Use this template" button on GitHub
+2. Create a new repository from this template
+3. Clone your new repository
+4. Replace or modify the sample code with your own
+5. Open in VS Code and reopen in container
+
+### Option 3: Copy to Existing Container
+If you already have a dev container but want to add this PySpark configuration:
+
+1. Copy the relevant sections from the `Dockerfile`:
+   - Spark installation
+   - Python dependencies
+   - Jupyter configuration
+2. Copy the port forwarding and startup commands from `devcontainer.json`
+3. Merge these with your existing container configuration
+
+### Post-Setup Steps
+
+Regardless of which option you choose:
+
+1. Update project-specific settings in `devcontainer.json` if needed:
+   - Container name
+   - Port numbers (if you have conflicts)
+   - Mount points
+   - Environment variables
+
+2. Modify the Python dependencies in `requirements.txt` for your project
+
+3. Update the README to reflect your project's specific requirements and usage
+
+Note: The container configuration is designed to be modular. You can:
+- Modify Python package versions in requirements.txt
+- Add additional system packages to the Dockerfile
+- Configure different Spark or Jupyter settings
+- Add your own startup scripts
+
 ## Features
 
 - Apache Spark 3.5.5
