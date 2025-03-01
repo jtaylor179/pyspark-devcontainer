@@ -25,32 +25,43 @@ This repository contains a development container configuration for Apache Spark 
 
 ## Using Jupyter Notebooks
 
-### Quick Start
-The simplest way to start Jupyter (the script is pre-installed in the workspace):
+### Automatic Startup
+Jupyter Notebook starts automatically when the container launches. Simply:
+1. Open your browser to http://localhost:8888
+2. Start creating or editing notebooks
+
+The startup log is available at `/home/spark/jupyter.log` if you need to troubleshoot.
+
+### Manual Start (Only if Automatic Startup Fails)
+If Jupyter didn't start automatically, you can start it manually:
 
 1. Open a terminal in VS Code (Terminal → New Terminal)
-2. Run:
+2. Run the startup script:
    ```bash
-   ./start-jupyter.sh
+   /usr/local/bin/start-jupyter.sh
    ```
-3. Open your browser to http://localhost:8888
 
-### Manual Start
-If needed, you can also start Jupyter directly with:
+Or start Jupyter directly:
 ```bash
-jupyter notebook --ip=0.0.0.0 --port=8888 --no-browser --allow-root --NotebookApp.token='' --NotebookApp.password=''
+jupyter notebook --ip=0.0.0.0 --port=8888 --no-browser --allow-root
 ```
 
 Note: For security in development environments, authentication is disabled by default. Do not use this configuration in production.
 
-### Verifying Jupyter is Running
-To check if Jupyter is already running:
+### Verifying Jupyter Status
+To check if Jupyter is running:
 1. Open a terminal and run:
    ```bash
    ps aux | grep jupyter
    ```
-2. If no Jupyter process is found, follow the startup steps above
-3. If a process is found but you can't access the notebook, check the Ports panel in VS Code to ensure port 8888 is forwarded
+2. Check the log file:
+   ```bash
+   cat /home/spark/jupyter.log
+   ```
+3. If Jupyter isn't running or you can't access it:
+   - Check the Ports panel in VS Code to ensure port 8888 is forwarded
+   - Try the manual start methods above
+   - Review the log file for any errors
 
 ## Debugging Python Scripts
 
