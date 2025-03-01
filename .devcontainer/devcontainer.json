@@ -1,0 +1,29 @@
+{
+    "name": "Spark Dev Container",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "context": ".."
+    },
+    "forwardPorts": [8888, 5678],
+    "extensions": [
+        "ms-python.python",
+        "ms-toolsai.jupyter"
+    ],
+    "settings": {
+        "python.pythonPath": "/usr/bin/python3",
+        "jupyter.jupyterServerType": "local"
+    },
+    "remoteUser": "spark",
+    "features": {
+        "ghcr.io/devcontainers/features/python:1": {}
+    },
+    "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
+    "workspaceFolder": "/workspace",
+    "mounts": [
+        "source=${localWorkspaceFolder}/.jupyter,target=/workspace/.jupyter,type=bind,consistency=cached",
+        "source=${localWorkspaceFolder}/.ipython,target=/workspace/.ipython,type=bind,consistency=cached",
+        "source=${localWorkspaceFolder}/notebooks,target=/workspace/notebooks,type=bind,consistency=cached",
+        "source=${localWorkspaceFolder}/data,target=/workspace/data,type=bind,consistency=cached"
+    ],
+    "postStartCommand": "nohup /usr/local/bin/start-jupyter.sh > /home/spark/jupyter.log 2>&1 &"
+} 
